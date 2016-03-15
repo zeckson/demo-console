@@ -9,12 +9,15 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'lib/**/*.js',
+      'tests/**/*.html',
       'tests/*.spec.js'
     ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {},
+    preprocessors: {
+      'tests/**/*.html': ['html2js']
+    },
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -60,7 +63,8 @@ module.exports = function(config) {
       'karma-chai',
       'karma-phantomjs2-launcher',
       'karma-coverage',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-html2js-preprocessor'
     ],
 
     // Start these browsers, currently available:
