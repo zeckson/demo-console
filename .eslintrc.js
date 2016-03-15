@@ -8,7 +8,7 @@ module.exports = {
     'browser': true,
     'mocha': true
   },
-  
+
   'globals': {
     expect: true
   },
@@ -47,13 +47,16 @@ module.exports = {
     'prefer-spread': 2,
     'quotes': [2, 'single'],
     'semi': [2, 'always'],
-    'space-after-keywords': 2,
+    'keyword-spacing': [2,
+      {
+        'before': true,
+        'after': true,
+        overrides: {}
+      }
+    ],
     'space-before-blocks': 2,
-    'space-before-function-paren': [2, 'never'],
-    'space-before-keywords': [2, 'always'],
     'space-in-parens': 2,
     'space-infix-ops': 2,
-    'space-return-throw-case': 2,
     'space-unary-ops': [2, {'words': true, 'nonwords': false}],
     'wrap-iife': [2, 'inside']
   }
