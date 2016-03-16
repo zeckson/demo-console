@@ -43,7 +43,9 @@ describe('Console', function() {
     var codeToLog = undefined;
     var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="undefined">undefined</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="undefined">undefined</span>\n\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -54,7 +56,9 @@ describe('Console', function() {
     var codeToLog = NaN;
     var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="nan">NaN</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="nan">NaN</span>\n\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -65,7 +69,9 @@ describe('Console', function() {
     var codeToLog = '';
     var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="string">""</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="string">""</span>\n\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -76,7 +82,9 @@ describe('Console', function() {
     var codeToLog = true;
     var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="boolean">true</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="boolean">true</span>\n\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -87,7 +95,9 @@ describe('Console', function() {
     var codeToLog = 100;
     var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="number">100</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="number">100</span>\n\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -98,12 +108,11 @@ describe('Console', function() {
     var codeToLog = [0, 1, 2];
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      'log: ' +
-      '[\n  ' +
+      '\n\nlog:  [\n  ' +
       '<span class="number">0</span>,\n  ' +
       '<span class="number">1</span>,\n  ' +
-      '<span class="number">2</span>\n' +
-      ']\n\n' +
+      '<span class="number">2</span>' +
+      '\n]\n\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
@@ -115,12 +124,10 @@ describe('Console', function() {
     var codeToLog = {key: 'value'};
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      'log: ' +
-      '{\n  ' +
+      '\n\nlog:  {\n  ' +
       '<span class="key">"key":</span> ' +
       '<span class="string">"value"</span>' +
-      '\n}' +
-      '\n\n' +
+      '\n}\n\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
@@ -136,17 +143,12 @@ describe('Console', function() {
 
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      'log: ' +
-      '[\n  ' +
-      '{\n    ' +
-      '<span class="key">"key1":</span> <span class="string">"value1"</span>' +
-      '\n  },' +
-      '\n  ' +
-      '{\n    ' +
-      '<span class="key">"key2":</span> <span class="string">"value2"</span>' +
-      '\n  }' +
-      '\n]' +
-      '\n\n' +
+      '\n\nlog:  [\n  {\n    ' +
+      '<span class="key">"key1":</span> ' +
+      '<span class="string">"value1"</span>\n  },\n  {\n    ' +
+      '<span class="key">"key2":</span> ' +
+      '<span class="string">"value2"</span>' +
+      '\n  }\n]\n\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
