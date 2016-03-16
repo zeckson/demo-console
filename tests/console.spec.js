@@ -45,7 +45,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="undefined">undefined</span>\n\n</pre>';
+      'log:  <span class="undefined">undefined</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -58,7 +58,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="nan">NaN</span>\n\n</pre>';
+      'log:  <span class="nan">NaN</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -71,7 +71,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="string">""</span>\n\n</pre>';
+      'log:  <span class="string">""</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -84,7 +84,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="boolean">true</span>\n\n</pre>';
+      'log:  <span class="boolean">true</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -97,7 +97,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="number">100</span>\n\n</pre>';
+      'log:  <span class="number">100</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -112,7 +112,7 @@ describe('Console', function() {
       '<span class="number">0</span>,\n  ' +
       '<span class="number">1</span>,\n  ' +
       '<span class="number">2</span>' +
-      '\n]\n\n' +
+      '\n]\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
@@ -127,7 +127,7 @@ describe('Console', function() {
       '\n\nlog:  {\n  ' +
       '<span class="key">"key":</span> ' +
       '<span class="string">"value"</span>' +
-      '\n}\n\n' +
+      '\n}\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
@@ -148,7 +148,7 @@ describe('Console', function() {
       '<span class="string">"value1"</span>\n  },\n  {\n    ' +
       '<span class="key">"key2":</span> ' +
       '<span class="string">"value2"</span>' +
-      '\n  }\n]\n\n' +
+      '\n  }\n]\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
