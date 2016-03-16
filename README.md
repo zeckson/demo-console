@@ -9,7 +9,8 @@
 <div class="console-container"></div>
 
 <!-- v0.1.0 — номер текущей версии, см. в https://github.com/htmlacademy/console-stub/releases -->
-<script src="https://rawgit.com/htmlacademy/console-stub/v0.1.0/lib/index.js"></script>
+<style> @import url('https://rawgit.com/htmlacademy/console-stub/v0.2.0/lib/index.css'); </style>
+<script src="https://rawgit.com/htmlacademy/console-stub/v0.2.0/lib/index.js"></script>
 
 <script>
  var jsConsole = jsConsoleInit(document.querySelector('.console-container'));
