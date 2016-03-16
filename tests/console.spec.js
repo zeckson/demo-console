@@ -58,7 +58,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="nan">NaN</span>\n</pre>';
+      'log:  <span class="NaN">NaN</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 

@@ -25,13 +25,27 @@
   background: #f8faf3;
 }
 
+.console-container__code span:hover::after
+{
+  content: attr(class);
+  position: relative;
+  top: -15px;
+  right: -15px;
+  padding: 3px 6px;
+  font-size: .9em;
+  font-style: italic;
+  border: 1px dashed;
+  border-radius: 4px;
+  opacity: .8;
+}
+
 .console-container__code .undefined
 {
   font-weight: bold;
   font-style: italic;
 }
 
-.console-container__code .nan
+.console-container__code .NaN
 {
   font-weight: bold;
 }
