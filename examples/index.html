@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example</title>
+  <link rel="stylesheet" href="/lib/index.css">
+</head>
+<body>
+<div class="console-container"></div>
+
+<script src="/lib/index.js"></script>
+
+<script>
+  var jsConsole = jsConsoleInit(document.querySelector('.console-container'));
+  console.log = jsConsole.log;
+</script>
+
+<script>
+  console.log(undefined);
+
+  console.log(NaN);
+
+  console.log(null);
+
+  console.log(true);
+
+  console.log(100);
+
+  console.log('Here is console log');
+
+  console.log("current year: ", (new Date()).getFullYear());
+
+  console.log([
+    {key1: 'value1'},
+    {key2: 'value2'}
+  ]);
+</script>
+</body>
+</html>

@@ -40,59 +40,119 @@ describe('Console', function() {
   });
 
   it('API: should log undefined', function() {
-    var undefinedToLog = undefined;
-    var emptyStringReference = '' +
+    var codeToLog = undefined;
+    var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="undefined">undefined</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="undefined">undefined</span>\n</pre>';
 
-    jsConsole.log(undefinedToLog);
+    jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(emptyStringReference);
+    expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
   it('API: should log NaN', function() {
-    var nanToLog = NaN;
-    var emptyStringReference = '' +
+    var codeToLog = NaN;
+    var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="nan">NaN</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="nan">NaN</span>\n</pre>';
 
-    jsConsole.log(nanToLog);
+    jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(emptyStringReference);
+    expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
   it('API: should log empty string', function() {
-    var emptyString = '';
-    var emptyStringReference = '' +
+    var codeToLog = '';
+    var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="string">""</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="string">""</span>\n</pre>';
 
-    jsConsole.log(emptyString);
+    jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(emptyStringReference);
+    expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
   it('API: should log boolean', function() {
-    var booleanToLog = true;
-    var emptyStringReference = '' +
+    var codeToLog = true;
+    var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="boolean">true</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="boolean">true</span>\n</pre>';
 
-    jsConsole.log(booleanToLog);
+    jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(emptyStringReference);
+    expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
   it('API: should log number', function() {
-    var numberToLog = 100;
-    var emptyStringReference = '' +
+    var codeToLog = 100;
+    var reference = '' +
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">log: <span class="number">100</span>\n\n</pre>';
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="number">100</span>\n</pre>';
 
-    jsConsole.log(numberToLog);
+    jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(emptyStringReference);
+    expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
+  it('API: should log array', function() {
+    var codeToLog = [0, 1, 2];
+    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
+      '<pre class="console-container__code">' +
+      '\n\nlog:  [\n  ' +
+      '<span class="number">0</span>,\n  ' +
+      '<span class="number">1</span>,\n  ' +
+      '<span class="number">2</span>' +
+      '\n]\n' +
+      '</pre>';
 
+    jsConsole.log(codeToLog);
+
+    expect(jsConsole.getLogSource()).to.equal(reference);
+  });
+
+  it('API: should log object', function() {
+    var codeToLog = {key: 'value'};
+    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
+      '<pre class="console-container__code">' +
+      '\n\nlog:  {\n  ' +
+      '<span class="key">"key":</span> ' +
+      '<span class="string">"value"</span>' +
+      '\n}\n' +
+      '</pre>';
+
+    jsConsole.log(codeToLog);
+
+    expect(jsConsole.getLogSource()).to.equal(reference);
+  });
+
+  it('API: should log array of objects', function() {
+    var codeToLog = [
+      {key1: 'value1'},
+      {key2: 'value2'}
+    ];
+
+    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
+      '<pre class="console-container__code">' +
+      '\n\nlog:  [\n  {\n    ' +
+      '<span class="key">"key1":</span> ' +
+      '<span class="string">"value1"</span>\n  },\n  {\n    ' +
+      '<span class="key">"key2":</span> ' +
+      '<span class="string">"value2"</span>' +
+      '\n  }\n]\n' +
+      '</pre>';
+
+    jsConsole.log(codeToLog);
+
+    expect(jsConsole.getLogSource()).to.equal(reference);
+  });
 });
