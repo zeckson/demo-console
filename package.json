@@ -29,6 +29,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^2.4.0",
+    "git-hooks": "^1.0.2",
     "karma": "^0.13.21",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.2",
