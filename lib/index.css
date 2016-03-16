@@ -1,6 +1,5 @@
 .console-container
 {
-  margin: 100px 0 0 0;
   display: inline-block;
   vertical-align: top;
   height: 100%;
@@ -10,7 +9,7 @@
 
 .console-container__header
 {
-  margin: -3.4em 0 0 0;
+  margin: 0;
 }
 
 .console-container__info
