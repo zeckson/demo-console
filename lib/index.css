@@ -26,6 +26,17 @@
   background: #f8faf3;
 }
 
+.console-container__code .undefined
+{
+  font-weight: bold;
+  font-style: italic;
+}
+
+.console-container__code .nan
+{
+  font-weight: bold;
+}
+
 .console-container__code .string
 {
   color: green;
