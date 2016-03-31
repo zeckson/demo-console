@@ -33,6 +33,15 @@
     {key1: 'value1'},
     {key2: 'value2'}
   ]);
+
+  jsConsole.log(function() { var testVariable = 'method code'; });
+
+  jsConsole.log([1, function() { var testVariable = 'method code'; }]);
+
+  jsConsole.log({
+    method: function() { var testVariable = 'method code'; }
+  });
+
 </script>
 </body>
 </html>
