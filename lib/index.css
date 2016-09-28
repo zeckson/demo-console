@@ -82,6 +82,11 @@
   color: #5bc0de;
 }
 
+.console-container__code .error
+{
+  color: red;
+}
+
 .editor-container
 {
   display: inline-block;
