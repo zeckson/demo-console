@@ -105,6 +105,30 @@ describe('Console', function() {
     expect(jsConsole.getLogSource()).to.equal(reference);
   });
 
+  it('API: should log Infinity', function() {
+    var reference = '' +
+      '<h3 class="console-container__header">Демо–Консоль</h3>' +
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="number">Infinity</span>\n</pre>';
+
+    jsConsole.log(Infinity);
+
+    expect(jsConsole.getLogSource()).to.equal(reference);
+  });
+
+  it('API: should log -Infinity', function() {
+    var reference = '' +
+      '<h3 class="console-container__header">Демо–Консоль</h3>' +
+      '<pre class="console-container__code">' +
+      '\n\n' +
+      'log:  <span class="number">-Infinity</span>\n</pre>';
+
+    jsConsole.log(-Infinity);
+
+    expect(jsConsole.getLogSource()).to.equal(reference);
+  });
+
   it('API: should log array', function() {
     var codeToLog = [0, 1, 2];
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
