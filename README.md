@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/htmlacademy/console-stub.svg?branch=master)](https://travis-ci.org/htmlacademy/console-stub)
+[![Build Status](https://travis-ci.org/htmlacademy/demo-console.svg?branch=master)](https://travis-ci.org/htmlacademy/demo-console)
 
 # Псевдо-Консоль
 Вывод лога Консоли в DOM-дерево.
