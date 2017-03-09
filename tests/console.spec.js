@@ -6,7 +6,6 @@
 
 'use strict';
 
-var HEADER = '<h3 class="console-container__header">Демо–Консоль</h3>';
 var CONSOLE_BEGIN = '<pre class="console-container__code">';
 var CONSOLE_END = '</pre>';
 
@@ -25,7 +24,7 @@ describe('Console', function () {
         return this;
       },
       build: function () {
-        var result = [HEADER, CONSOLE_BEGIN];
+        var result = [CONSOLE_BEGIN];
         result.push(elements.join('\n\n\n'));
         if (elements.length > 0) {
           result.push('\n\n\n');
