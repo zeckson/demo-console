@@ -10,9 +10,11 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/chai-diff/node_modules/diff/dist/diff.js',
+      'node_modules/chai-diff/chai-diff.js',
       'lib/**/*.js',
       'tests/**/*.html',
-      'tests/*.spec.js'
+      'tests/*.spec.js',
     ],
 
     // preprocess matching files before serving them to the browser

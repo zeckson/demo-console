@@ -45,9 +45,11 @@ describe('Console', function () {
       });
     }
 
-    expect(jsConsole.getLogSource()).to.equal(result.build());
+    expect(jsConsole.getLogSource()).not.differentFrom(result.build(), {showSpace: true, context: 5});
+    // expect(jsConsole.getLogSource()).to.equal();
   };
 
+  chai.use(chaiDiff);
 
   beforeEach(function () {
     // Load html context
