@@ -142,6 +142,14 @@ describe('Console', function () {
       ]);
     });
 
+    it('should log values', function () {
+      jsConsole.log(-Infinity, 0);
+
+      assert([
+        'log: <span class="number">-Infinity</span>' + '\t<span class="number">0</span>'
+      ]);
+    });
+
   });
 
   it('API: should log array', function () {
@@ -169,7 +177,7 @@ describe('Console', function () {
 
     jsConsole.log(codeToLog);
 
-    assert('log: <span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>');
+    assert('log: <span class="function">' + codeToLog.toString() + '</span>');
   });
 
   it('API: should log object method: function', function () {
