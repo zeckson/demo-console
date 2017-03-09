@@ -6,11 +6,48 @@
 
 'use strict';
 
+var HEADER = '<h3 class="console-container__header">Демо–Консоль</h3>';
+var CONSOLE_BEGIN = '<pre class="console-container__code">';
+var CONSOLE_END = '</pre>';
+
 describe('Console', function () {
   var testDomContext;
   var jsConsoleInit = window.jsConsoleInit;
   var jsConsole;
   var consoleContainer;
+
+  var html = function () {
+    var elements = [];
+
+    return {
+      append: function (element) {
+        elements.push(element);
+        return this;
+      },
+      build: function () {
+        var result = [HEADER, CONSOLE_BEGIN];
+        if (elements.length > 0) {
+          result.push('\n\n');
+          result = result.concat(elements);
+        }
+        result.push(CONSOLE_END);
+        return result.join('');
+      }
+    };
+  };
+
+  var assert = function (elements) {
+    var result = html();
+
+    if (elements) {
+      elements = Array.isArray(elements) ? elements : [elements];
+      elements.forEach(function (el) {
+        result.append(el);
+      });
+    }
+
+    expect(jsConsole.getLogSource()).to.equal(result.build());
+  };
 
 
   beforeEach(function () {
@@ -36,130 +73,62 @@ describe('Console', function () {
   });
 
   it('init: should create HTML console stub ', function () {
-    expect(consoleContainer.innerHTML).to.equal(
-        '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code"></pre>'
-    );
+    assert();
   });
 
   it('API: should log undefined', function () {
-    var codeToLog;
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="undefined">undefined</span>\n</pre>';
+    jsConsole.log(void 0);
 
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: <span class="undefined">undefined</span>\n');
   });
 
   it('API: should log NaN', function () {
-    var codeToLog = NaN;
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="NaN">NaN</span>\n</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    jsConsole.log(NaN);
+    assert('log: <span class="NaN">NaN</span>\n');
   });
 
   it('API: should log empty string', function () {
-    var codeToLog = '';
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="string">""</span>\n</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    jsConsole.log('');
+    assert('log: <span class="string">""</span>\n');
   });
 
   it('API: should log boolean', function () {
-    var codeToLog = true;
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="boolean">true</span>\n</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    jsConsole.log(true);
+    assert('log: <span class="boolean">true</span>\n');
   });
 
   it('API: should log number', function () {
-    var codeToLog = 100;
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="number">100</span>\n</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    jsConsole.log(100);
+    assert('log: <span class="number">100</span>\n');
   });
 
   it('API: should log Infinity', function () {
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="number">Infinity</span>\n</pre>';
-
     jsConsole.log(Infinity);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: <span class="number">Infinity</span>\n');
   });
 
   it('API: should log -Infinity', function () {
-    var reference = '' +
-      '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\n' +
-      'log: <span class="number">-Infinity</span>\n</pre>';
-
     jsConsole.log(-Infinity);
 
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: <span class="number">-Infinity</span>\n');
   });
 
   it('API: should log array', function () {
-    var codeToLog = [0, 1, 2];
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\nlog: [\n  ' +
+    jsConsole.log([0, 1, 2]);
+    assert('log: [\n  ' +
       '<span class="number">0</span>,\n  ' +
       '<span class="number">1</span>,\n  ' +
       '<span class="number">2</span>' +
-      '\n]\n' +
-      '</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+      '\n]\n');
   });
 
   it('API: should log object', function () {
-    var codeToLog = {key: 'value'};
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\nlog: {\n  ' +
+    jsConsole.log({key: 'value'});
+
+    assert('log: {\n  ' +
       '<span class="key">"key":</span> ' +
       '<span class="string">"value"</span>' +
-      '\n}\n' +
-      '</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+      '\n}\n');
   });
 
   it('API: should log function', function () {
@@ -167,14 +136,9 @@ describe('Console', function () {
       var testVariable = 'method code';
     };
 
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">\n\nlog: ' +
-      '<span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>\n' +
-      '</pre>';
-
     jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: <span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>\n');
   });
 
   it('API: should log object method: function', function () {
@@ -183,18 +147,14 @@ describe('Console', function () {
         var testVariable = 'method code';
       }
     };
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\nlog: {\n  ' +
-      '<span class="key">"method":</span> ' +
-      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
-      '</span>' +
-      '\n}\n' +
-      '</pre>';
 
     jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: {\n  ' +
+      '<span class="key">"method":</span> ' +
+      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
+      '</span>' +
+      '\n}\n');
   });
 
   it('API: should log array item: function', function () {
@@ -203,18 +163,14 @@ describe('Console', function () {
         var testVariable = 'method code';
       }
     };
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\nlog: {\n  ' +
-      '<span class="key">"method":</span> ' +
-      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
-      '</span>' +
-      '\n}\n' +
-      '</pre>';
 
     jsConsole.log(codeToLog);
 
-    expect(jsConsole.getLogSource()).to.equal(reference);
+    assert('log: {\n  ' +
+      '<span class="key">"method":</span> ' +
+      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
+      '</span>' +
+      '\n}\n');
   });
 
   it('API: should log array of objects', function () {
@@ -223,19 +179,14 @@ describe('Console', function () {
       {key2: 'value2'}
     ];
 
-    var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">' +
-      '\n\nlog: [\n  {\n    ' +
+    jsConsole.log(codeToLog);
+
+    assert('log: [\n  {\n    ' +
       '<span class="key">"key1":</span> ' +
       '<span class="string">"value1"</span>\n  },\n  {\n    ' +
       '<span class="key">"key2":</span> ' +
       '<span class="string">"value2"</span>' +
-      '\n  }\n]\n' +
-      '</pre>';
-
-    jsConsole.log(codeToLog);
-
-    expect(jsConsole.getLogSource()).to.equal(reference);
+      '\n  }\n]\n');
   });
 
   it('API: should add log handler', function () {
