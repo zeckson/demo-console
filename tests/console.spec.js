@@ -30,7 +30,7 @@ describe('Console', function() {
   });
 
   it('init: should create console stub with API methods', function() {
-    expect(jsConsole).to.have.all.keys('log', 'clean', 'getLogSource');
+    expect(jsConsole).to.have.all.keys('log', 'error', 'clean', 'getLogSource');
   });
 
   it('init: should create HTML console stub ', function() {
@@ -46,7 +46,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="undefined">undefined</span>\n</pre>';
+      'log: <span class="undefined">undefined</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -59,7 +59,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="NaN">NaN</span>\n</pre>';
+      'log: <span class="NaN">NaN</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -72,7 +72,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="string">""</span>\n</pre>';
+      'log: <span class="string">""</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -85,7 +85,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="boolean">true</span>\n</pre>';
+      'log: <span class="boolean">true</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -98,7 +98,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="number">100</span>\n</pre>';
+      'log: <span class="number">100</span>\n</pre>';
 
     jsConsole.log(codeToLog);
 
@@ -110,7 +110,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="number">Infinity</span>\n</pre>';
+      'log: <span class="number">Infinity</span>\n</pre>';
 
     jsConsole.log(Infinity);
 
@@ -122,7 +122,7 @@ describe('Console', function() {
       '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
       '\n\n' +
-      'log:  <span class="number">-Infinity</span>\n</pre>';
+      'log: <span class="number">-Infinity</span>\n</pre>';
 
     jsConsole.log(-Infinity);
 
@@ -133,7 +133,7 @@ describe('Console', function() {
     var codeToLog = [0, 1, 2];
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      '\n\nlog:  [\n  ' +
+      '\n\nlog: [\n  ' +
       '<span class="number">0</span>,\n  ' +
       '<span class="number">1</span>,\n  ' +
       '<span class="number">2</span>' +
@@ -149,7 +149,7 @@ describe('Console', function() {
     var codeToLog = {key: 'value'};
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      '\n\nlog:  {\n  ' +
+      '\n\nlog: {\n  ' +
       '<span class="key">"key":</span> ' +
       '<span class="string">"value"</span>' +
       '\n}\n' +
@@ -166,9 +166,8 @@ describe('Console', function() {
     };
 
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
-      '<pre class="console-container__code">\n\nlog:  ' +
-      '<span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>' +
-      '\n' +
+      '<pre class="console-container__code">\n\nlog: ' +
+      '<span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>\n' +
       '</pre>';
 
     jsConsole.log(codeToLog);
@@ -184,7 +183,7 @@ describe('Console', function() {
     };
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      '\n\nlog:  {\n  ' +
+      '\n\nlog: {\n  ' +
       '<span class="key">"method":</span> ' +
       '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
       '</span>' +
@@ -204,7 +203,7 @@ describe('Console', function() {
     };
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      '\n\nlog:  {\n  ' +
+      '\n\nlog: {\n  ' +
       '<span class="key">"method":</span> ' +
       '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
       '</span>' +
@@ -224,7 +223,7 @@ describe('Console', function() {
 
     var reference = '<h3 class="console-container__header">Демо–Консоль</h3>' +
       '<pre class="console-container__code">' +
-      '\n\nlog:  [\n  {\n    ' +
+      '\n\nlog: [\n  {\n    ' +
       '<span class="key">"key1":</span> ' +
       '<span class="string">"value1"</span>\n  },\n  {\n    ' +
       '<span class="key">"key2":</span> ' +
