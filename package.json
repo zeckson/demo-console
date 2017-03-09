@@ -1,7 +1,7 @@
 {
-  "name": "console-stub",
+  "name": "demo-console",
   "version": "0.1.0",
-  "description": "Console Stub",
+  "description": "Inbrowser Demo Console",
   "main": "lib/index.js",
   "scripts": {
     "test": "karma start --browsers=PhantomJS2 --single-run && npm run test:lint",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/htmlacademy/console-stub.git"
+    "url": "git+https://github.com/htmlacademy/demo-console.git"
   },
   "author": "HTML Academy",
   "license": "",
   "bugs": {
-    "url": "https://github.com/htmlacademy/console-stub/issues"
+    "url": "https://github.com/htmlacademy/demo-console/issues"
   },
-  "homepage": "https://github.com/htmlacademy/console-stub#readme",
+  "homepage": "https://github.com/htmlacademy/demo-console#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "3.17.1",

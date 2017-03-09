@@ -8,8 +8,8 @@
 ```html
 <div class="console-container"></div>
 
-<style> @import url('//htmlacademy.github.io/console-stub/lib/index.css'); </style>
-<script src="//htmlacademy.github.io/console-stub/lib/index.js"></script>
+<style> @import url('//htmlacademy.github.io/demo-console/lib/index.css'); </style>
+<script src="//htmlacademy.github.io/demo-console/lib/index.js"></script>
 
 <script>
  var jsConsole = jsConsoleInit(document.querySelector('.console-container'));
