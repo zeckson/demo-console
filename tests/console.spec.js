@@ -26,9 +26,9 @@ describe('Console', function () {
       },
       build: function () {
         var result = [HEADER, CONSOLE_BEGIN];
+        result.push(elements.join('\n\n\n'));
         if (elements.length > 0) {
-          result.push('\n\n');
-          result = result.concat(elements);
+          result.push('\n\n\n');
         }
         result.push(CONSOLE_END);
         return result.join('');
@@ -68,49 +68,78 @@ describe('Console', function () {
     testDomContext = null;
   });
 
-  it('init: should create console stub with API methods', function () {
-    expect(jsConsole).to.have.all.keys('log', 'error', 'clean', 'getLogSource');
+  describe('#init:', function () {
+    it('should create console stub with API methods', function () {
+      expect(jsConsole).to.have.all.keys('log', 'error', 'clean', 'getLogSource');
+    });
+
+    it('should create HTML console stub ', function () {
+      assert();
+    });
+
+    it('should add log handler', function () {
+      var codeToLog = 'this code should pass to log handler';
+      var reference;
+
+      // TODO: refactor with https://github.com/chaijs/chai-spies
+      jsConsole.onlog = function (logData) {
+        reference = logData[0]; // logData is arguments array
+      };
+
+      jsConsole.log(codeToLog);
+
+      expect(codeToLog).to.equal(reference);
+    });
   });
 
-  it('init: should create HTML console stub ', function () {
-    assert();
-  });
+  describe('API: primitive types:', function () {
+    it('should log undefined', function () {
+      jsConsole.log(void 0);
 
-  it('API: should log undefined', function () {
-    jsConsole.log(void 0);
+      assert('log: <span class="undefined">undefined</span>');
+    });
 
-    assert('log: <span class="undefined">undefined</span>\n');
-  });
+    it('should log NaN', function () {
+      jsConsole.log(NaN);
+      assert('log: <span class="NaN">NaN</span>');
+    });
 
-  it('API: should log NaN', function () {
-    jsConsole.log(NaN);
-    assert('log: <span class="NaN">NaN</span>\n');
-  });
+    it('should log empty string', function () {
+      jsConsole.log('');
+      assert('log: <span class="string">""</span>');
+    });
 
-  it('API: should log empty string', function () {
-    jsConsole.log('');
-    assert('log: <span class="string">""</span>\n');
-  });
+    it('should log boolean', function () {
+      jsConsole.log(true);
+      assert('log: <span class="boolean">true</span>');
+    });
 
-  it('API: should log boolean', function () {
-    jsConsole.log(true);
-    assert('log: <span class="boolean">true</span>\n');
-  });
+    it('should log number', function () {
+      jsConsole.log(100);
+      assert('log: <span class="number">100</span>');
+    });
 
-  it('API: should log number', function () {
-    jsConsole.log(100);
-    assert('log: <span class="number">100</span>\n');
-  });
+    it('should log Infinity', function () {
+      jsConsole.log(Infinity);
+      assert('log: <span class="number">Infinity</span>');
+    });
 
-  it('API: should log Infinity', function () {
-    jsConsole.log(Infinity);
-    assert('log: <span class="number">Infinity</span>\n');
-  });
+    it('should log -Infinity', function () {
+      jsConsole.log(-Infinity);
 
-  it('API: should log -Infinity', function () {
-    jsConsole.log(-Infinity);
+      assert('log: <span class="number">-Infinity</span>');
+    });
 
-    assert('log: <span class="number">-Infinity</span>\n');
+    it('should log several entries', function () {
+      jsConsole.log(-Infinity);
+      jsConsole.log(-Infinity);
+
+      assert([
+        'log: <span class="number">-Infinity</span>',
+        'log: <span class="number">-Infinity</span>'
+      ]);
+    });
+
   });
 
   it('API: should log array', function () {
@@ -119,7 +148,7 @@ describe('Console', function () {
       '<span class="number">0</span>,\n  ' +
       '<span class="number">1</span>,\n  ' +
       '<span class="number">2</span>' +
-      '\n]\n');
+      '\n]');
   });
 
   it('API: should log object', function () {
@@ -128,7 +157,7 @@ describe('Console', function () {
     assert('log: {\n  ' +
       '<span class="key">"key":</span> ' +
       '<span class="string">"value"</span>' +
-      '\n}\n');
+      '\n}');
   });
 
   it('API: should log function', function () {
@@ -138,7 +167,7 @@ describe('Console', function () {
 
     jsConsole.log(codeToLog);
 
-    assert('log: <span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>\n');
+    assert('log: <span class="function">function () {\n      var testVariable = \'method code\';\n    }</span>');
   });
 
   it('API: should log object method: function', function () {
@@ -154,7 +183,7 @@ describe('Console', function () {
       '<span class="key">"method":</span> ' +
       '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
       '</span>' +
-      '\n}\n');
+      '\n}');
   });
 
   it('API: should log array item: function', function () {
@@ -170,7 +199,7 @@ describe('Console', function () {
       '<span class="key">"method":</span> ' +
       '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
       '</span>' +
-      '\n}\n');
+      '\n}');
   });
 
   it('API: should log array of objects', function () {
@@ -186,20 +215,7 @@ describe('Console', function () {
       '<span class="string">"value1"</span>\n  },\n  {\n    ' +
       '<span class="key">"key2":</span> ' +
       '<span class="string">"value2"</span>' +
-      '\n  }\n]\n');
+      '\n  }\n]');
   });
 
-  it('API: should add log handler', function () {
-    var codeToLog = 'this code should pass to log handler';
-    var reference;
-
-    // TODO: refactor with https://github.com/chaijs/chai-spies
-    jsConsole.onlog = function (logData) {
-      reference = logData[0]; // logData is arguments array
-    };
-
-    jsConsole.log(codeToLog);
-
-    expect(codeToLog).to.equal(reference);
-  });
 });
