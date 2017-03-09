@@ -132,11 +132,13 @@ describe('Console', function () {
 
     it('should log several entries', function () {
       jsConsole.log(-Infinity);
-      jsConsole.log(-Infinity);
+      jsConsole.log(0);
+      jsConsole.log(Infinity);
 
       assert([
         'log: <span class="number">-Infinity</span>',
-        'log: <span class="number">-Infinity</span>'
+        'log: <span class="number">0</span>',
+        'log: <span class="number">Infinity</span>'
       ]);
     });
 
