@@ -1,0 +1,34 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="../lib/index-silent.js"></script>
+  <!--<script src="//zeckson.github.io/console-stub/lib/index-silent.js"></script>-->
+</head>
+<body>
+<script id="scenario">try {
+  var seasons = ['Лето', 'Осень', 'Весна', 'Зима'];
+
+  var getCloth = function (season) {
+    if (season === 'Лето') {
+      return 'Майку';
+    } else if (season === 'Осень') {
+      return 'Зонт';
+    } else if (season === 'Весна') {
+      return 'Плащ';
+    } else {
+      return 'Варежки';
+    }
+  };
+
+  seasons.forEach(function (season) {
+    console.log('Что надеть, если сейчас ' + season + '?');
+    console.log(getCloth(season));
+  });
+
+} catch (err) {
+  console.warn('Error from inserted code');
+  console.warn(err);
+}</script>
+</body>
+</html>

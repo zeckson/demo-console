@@ -7,11 +7,7 @@
     "test": "karma start --browsers=PhantomJS2 --single-run && npm run test:lint",
     "test:dev": "karma start --browsers=Chrome --auto-watch",
     "test:lint": "eslint ./**/*.js",
-    "deps:install": "npm i",
-    "deps:unistall": "rm -rf node_modules",
-    "examples": "npm-run-all examples:deps examples:server",
-    "examples:deps": "npm i local-web-server",
-    "examples:server": "ws"
+    "examples": "open examples/index.html"
   },
   "repository": {
     "type": "git",
@@ -23,13 +19,10 @@
     "url": "https://github.com/htmlacademy/console-stub/issues"
   },
   "homepage": "https://github.com/htmlacademy/console-stub#readme",
-  "dependencies": {
-    "npm-run-all": "^1.5.1"
-  },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^2.4.0",
-    "git-hooks": "^1.0.2",
+    "eslint": "3.17.1",
+    "eslint-config-htmlacademy": "0.2.3",
     "karma": "^0.13.21",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.2",

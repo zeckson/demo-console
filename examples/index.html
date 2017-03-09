@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Example</title>
-  <link rel="stylesheet" href="/lib/index.css">
+  <link rel="stylesheet" href="../lib/index.css">
 </head>
 <body>
 <div class="console-container"></div>
 
-<script src="/lib/index.js"></script>
+<script src="../lib/index.js"></script>
 
 <script>
   window.jsConsole = jsConsoleInit(document.querySelector('.console-container'));
@@ -24,6 +24,10 @@
   jsConsole.log(true);
 
   jsConsole.log(100);
+
+  jsConsole.log(Infinity);
+
+  jsConsole.log(-Infinity);
 
   jsConsole.log('Here is console log');
 
