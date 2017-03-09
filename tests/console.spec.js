@@ -129,6 +129,18 @@ describe('Console', function () {
       assert('log: <span class="number">-Infinity</span>');
     });
 
+    it('should log error', function () {
+      jsConsole.error('You shall not pass!');
+
+      assert('log: <span class="error">You shall not pass!</span>');
+    });
+
+    it('should log error', function () {
+      jsConsole.log(new Error('You shall not pass!'));
+
+      assert('log: <span class="error">You shall not pass!</span>');
+    });
+
     it('should log several entries', function () {
       jsConsole.log(-Infinity);
       jsConsole.log(0);
@@ -141,7 +153,7 @@ describe('Console', function () {
       ]);
     });
 
-    it('should log values', function () {
+    it('should log several values', function () {
       jsConsole.log(-Infinity, 0);
 
       assert([
