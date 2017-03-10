@@ -7,7 +7,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: MoCeQYRmsMEFLPOn7y63LP8XeeKmb+g1Rs3K04bYcApS7q5j8V6p/nNnAMKKFXjbf5BNG9aVrUCoO1maFO6QqDmygX5tG+sbMi03btq/i1pmkjCg+sEmmkkhO9Wuawg2wPjRwU/qV3pK9p+zzNgXDw9ccPdZjinDFoi08+vPcxU=
+    secure: 6FB/gnZSSoSu+evyURN+e6M0EHLJrHvPf1ZFuVcvBtPfDbMm1iSQFCpkk2WbvULItoncoyP1umdC31TSK+OKOgKjAbi00zT8PnmrMNHSFpd4d2jQrEtP9GrB1E0qiyHSt+TRqKNHdykOaM+vARUGIdXEsiIECKjMCS4NnPi/OY/tN8fn6IzXQSoUGNR2ZIuv5rC6oqBMCC9yXhr9BOrS8h7XihqEEplYBm12klAbKAoa0ITBcx7QK0Mt+OzYjWY0RLA6WBpkLB3+D+LiwwLb4/TmOQSd7Tv1/Z3TeSVqSURNw82FiD0EBREK9RMiW5aTgQ0xRBvS+nnOxMdkBTij79FlLO7/89Ac1rL+o98fz9n/bP9DmDtUXzM/KVNPpdOm/PYjy8bFdsQTPpVGM+Zj9XbffPrryRrf+zvuiYxtk5tw/bMxgXqIzp1iP2X3TqKinIubaY8Ly1DdLobHAWwAPSEZd8Oc8IsEjMmNjtWZlNgFT3uTMcaVvZYzlgPVH+7RJlLy2IVqKNuGXv7YahN0it+sC/z2wCFqf+tkxe1pxMSDOfIvfbqiTvNpo5Jyik322NTT8h7HMm6lCWzwMPdawujKrFXZH5Hvu1zilQmtgfAI4afIQ0jTq8PClVDh29S/px5yUToOTHeL2b+aY1tlK/DNdhl7uSTlIkTVCvZOzA0=
   file:
     - out/index.min.js
     - out/index-silent.js
@@ -15,4 +15,3 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    all_branches: true
