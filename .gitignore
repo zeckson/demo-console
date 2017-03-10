@@ -1,5 +1,6 @@
 node_modules
 *.log
+*.log.*
 tests/coverage
 tests/report-lcovonly.txt
 
