@@ -14,7 +14,7 @@ module.exports = function (config) {
       'node_modules/chai-diff/chai-diff.js',
       'lib/**/*.js',
       'tests/**/*.html',
-      'tests/*.spec.js',
+      'tests/*.spec.js'
     ],
 
     // preprocess matching files before serving them to the browser
@@ -32,8 +32,7 @@ module.exports = function (config) {
 
     // test results reporter to use
     reporters: [
-      'spec',
-      'coverage'
+      'spec'
     ],
 
     specReporter: {
@@ -46,26 +45,11 @@ module.exports = function (config) {
 
     reportSlowerThan: 500,
 
-    coverageReporter: {
-
-      dir: 'tests/coverage',
-
-      reporters: [
-        {type: 'text'},
-        {
-          type: 'lcovonly',
-          subdir: '.',
-          file: 'tests/report-lcovonly.txt'
-        }
-      ]
-    },
-
 
     plugins: [
       'karma-mocha',
       'karma-chai',
       'karma-phantomjs2-launcher',
-      'karma-coverage',
       'karma-spec-reporter',
       'karma-html2js-preprocessor'
     ],
