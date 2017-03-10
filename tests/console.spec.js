@@ -189,7 +189,8 @@ describe('Console', function () {
 
     jsConsole.log(codeToLog);
 
-    assert('log: <span class="function">' + codeToLog.toString() + '</span>');
+    var funCode = 'function () {\n  var testVariable = \'method code\';\n}';
+    assert('log: <span class="function">' + funCode + '</span>');
   });
 
   it('API: should log object method: function', function () {
@@ -199,11 +200,13 @@ describe('Console', function () {
       }
     };
 
+    var funCode = 'function () {\n    var testVariable = \'method code\';\n  }';
+
     jsConsole.log(codeToLog);
 
     assert('log: {\n  ' +
       '<span class="key">method</span>: ' +
-      '<span class="function">' + codeToLog.method.toString() + '</span>' +
+      '<span class="function">' + funCode + '</span>' +
       '\n}');
   });
 
@@ -214,10 +217,12 @@ describe('Console', function () {
       }
     ];
 
+    var funCode = 'function () {\n    var testVariable = \'method code\';\n  }';
+
     jsConsole.log(codeToLog);
 
     assert('log: [\n  ' +
-      '<span class="function">' + codeToLog[0].toString() + '</span>'  +
+      '<span class="function">' + funCode + '</span>'  +
       '\n]');
   });
 
