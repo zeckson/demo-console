@@ -59,7 +59,7 @@ describe('Array builder', function () {
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[1], 2], void 0, 2));
     });
-  })
+  });
 
 
 });

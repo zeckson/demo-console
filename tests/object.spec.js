@@ -64,5 +64,5 @@ describe('Object builder', function () {
         key2: {key: 'value'}
       }, void 0, 2));
     });
-  })
+  });
 });

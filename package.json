@@ -4,15 +4,16 @@
   "description": "Inbrowser Demo Console",
   "main": "lib/index.js",
   "scripts": {
-    "test": "karma start --browsers=PhantomJS2 --single-run && npm run test:lint",
+    "lint": "eslint ./**/*.js",
+    "lint:fix": "eslint ./**/*.js --fix",
+    "test": "karma start --browsers=PhantomJS2 --single-run && npm run lint",
     "test:dev": "karma start --browsers=Chrome --auto-watch",
-    "test:lint": "eslint ./**/*.js",
     "clean": "rm -rf ./out && mkdir ./out",
     "concat": "uglifyjs lib/**/*.js lib/*.js -b -o out/index.js",
     "minify": "uglifyjs lib/**/*.js lib/*.js -b -o out/index.min.js",
     "copy": "cp lib/*.css out",
     "build": "npm run clean && npm run concat && npm run minify && npm run copy",
-    "examples": "open examples/index.html"
+    "examples": "npm run build && open examples/index.html"
   },
   "repository": {
     "type": "git",
