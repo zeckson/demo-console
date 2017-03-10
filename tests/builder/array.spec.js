@@ -15,16 +15,27 @@ describe('Array builder', function () {
 
     it('single', function () {
       var arr = array();
-      arr.begin().add('1').end();
+      arr.begin().newItem().add('1').end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([1], void 0, 2));
     });
 
     it('many', function () {
       var arr = array();
-      arr.begin().add('1').add('2').end();
+      arr.begin().newItem().add('1').newItem().add('2').end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([1, 2], void 0, 2));
+    });
+
+    it('many buffer', function () {
+      var arr = array();
+      arr.begin().
+        newItem().add(arr.buffer.push('1')).
+        newItem().add(arr.buffer.push('2')).
+        newItem().add(arr.buffer.push('3')).
+        end();
+
+      expect(arr.buffer.print()).to.equal(JSON.stringify([1, 2, 3], void 0, 2));
     });
 
 
@@ -34,8 +45,8 @@ describe('Array builder', function () {
 
     it('two-dimensional', function () {
       var arr = array();
-      arr.begin().
-        add(array(arr.buffer).begin().add('1').end()).
+      arr.begin()
+        .newItem().add(array(arr.buffer).begin().newItem().add('1').end()).
         end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[1]], void 0, 2));
@@ -44,16 +55,17 @@ describe('Array builder', function () {
     it('three-dimensional', function () {
       var arr = array();
       arr.begin().
-        add(array(arr.buffer).begin().add(array(arr.buffer).begin().add('1').end()).end()).
-        end();
+        newItem().add(array(arr.buffer).begin().
+        newItem().add(array(arr.buffer).begin().
+        newItem().add('1').end()).end()).end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[[1]]], void 0, 2));
     });
 
     it('three-dimensional empty', function () {
       var arr = array();
-      arr.begin().
-        add(array(arr.buffer).begin().add(array(arr.buffer).begin().end()).end()).
+      arr.begin().newItem().
+        add(array(arr.buffer).begin().newItem().add(array(arr.buffer).begin().end()).end()).
         end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[[]]], void 0, 2));
@@ -61,8 +73,8 @@ describe('Array builder', function () {
 
     it('mixed', function () {
       var arr = array();
-      arr.begin().
-        add(array(arr.buffer).begin().add('1').end()).
+      arr.begin().newItem().
+        add(array(arr.buffer).begin().newItem().add('1').end()).newItem().
         add('2').
         end();
 
