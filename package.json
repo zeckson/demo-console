@@ -9,9 +9,9 @@
     "test": "karma start --browsers=PhantomJS2 --single-run && npm run lint",
     "test:dev": "karma start --browsers=Chrome --auto-watch",
     "clean": "rm -rf ./out && mkdir ./out",
-    "concat": "uglifyjs lib/**/*.js lib/*.js -b -o out/index.js",
-    "minify": "uglifyjs lib/**/*.js lib/*.js --compress -o out/index.min.js",
-    "copy": "cp lib/*.css out",
+    "concat": "uglifyjs lib/**/*.js lib/index.js -b -o out/index.js",
+    "minify": "uglifyjs lib/**/*.js lib/index.js -C -m -o out/index.min.js",
+    "copy": "cp lib/*.css lib/index-silent.js out",
     "build": "npm run clean && npm run concat && npm run minify && npm run copy",
     "start": "npm run build && open examples/index.html"
   },
