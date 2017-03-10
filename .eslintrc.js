@@ -10,6 +10,13 @@ module.exports = {
   },
 
   'globals': {
-    expect: true
+    expect: true,
+    chai: true,
+    chaiDiff: true,
+    Symbol: true
+  },
+
+  'rules': {
+    'no-fallthrough': 'off'
   }
 };
