@@ -46,14 +46,13 @@ describe('Console', function () {
     }
 
     expect(jsConsole.getLogSource()).not.differentFrom(result.build(), {showSpace: true, context: 5});
-    // expect(jsConsole.getLogSource()).to.equal();
   };
 
   chai.use(chaiDiff);
 
   beforeEach(function () {
     // Load html context
-    document.body.innerHTML = window.__html__['tests/test-context.html'];
+    document.body.innerHTML = '<div class="test-context"></div>';
     testDomContext = document.querySelector('.test-context');
 
     consoleContainer = document.createElement('div');

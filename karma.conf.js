@@ -13,15 +13,9 @@ module.exports = function (config) {
       'node_modules/chai-diff/node_modules/diff/dist/diff.js',
       'node_modules/chai-diff/chai-diff.js',
       'lib/**/*.js',
-      'tests/**/*.html',
-      'tests/*.spec.js'
+      'tests/*.spec.js',
+      'tests/**/*.spec.js'
     ],
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'tests/**/*.html': ['html2js']
-    },
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -50,8 +44,7 @@ module.exports = function (config) {
       'karma-mocha',
       'karma-chai',
       'karma-phantomjs2-launcher',
-      'karma-spec-reporter',
-      'karma-html2js-preprocessor'
+      'karma-spec-reporter'
     ],
 
     // Start these browsers, currently available:
