@@ -56,6 +56,7 @@ describe('Primitive builder', function () {
     it('numbers', function () {
       expect(prime([42, 43]).buffer.print()).to.equal('<span class="number">42</span>\t<span class="number">43</span>')
     });
+
     it('number and string', function () {
       expect(prime([42, 'string']).buffer.print()).to.
         equal('<span class="number">42</span>\t<span class="string">"string"</span>')
