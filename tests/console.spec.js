@@ -177,7 +177,7 @@ describe('Console', function () {
     jsConsole.log({key: 'value'});
 
     assert('log: {\n  ' +
-      '<span class="key">"key":</span> ' +
+      '<span class="key">key</span>: ' +
       '<span class="string">"value"</span>' +
       '\n}');
   });
@@ -202,26 +202,23 @@ describe('Console', function () {
     jsConsole.log(codeToLog);
 
     assert('log: {\n  ' +
-      '<span class="key">"method":</span> ' +
-      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
-      '</span>' +
+      '<span class="key">method</span>: ' +
+      '<span class="function">' + codeToLog.method.toString() + '</span>' +
       '\n}');
   });
 
   it('API: should log array item: function', function () {
-    var codeToLog = {
-      method: function () {
+    var codeToLog = [
+      function () {
         var testVariable = 'method code';
       }
-    };
+    ];
 
     jsConsole.log(codeToLog);
 
-    assert('log: {\n  ' +
-      '<span class="key">"method":</span> ' +
-      '<span class="string">"function () {\\n        var testVariable = \'method code\';\\n      }"' +
-      '</span>' +
-      '\n}');
+    assert('log: [\n  ' +
+      '<span class="function">' + codeToLog[0].toString() + '</span>'  +
+      '\n]');
   });
 
   it('API: should log array of objects', function () {
@@ -233,9 +230,9 @@ describe('Console', function () {
     jsConsole.log(codeToLog);
 
     assert('log: [\n  {\n    ' +
-      '<span class="key">"key1":</span> ' +
+      '<span class="key">key1</span>: ' +
       '<span class="string">"value1"</span>\n  },\n  {\n    ' +
-      '<span class="key">"key2":</span> ' +
+      '<span class="key">key2</span>: ' +
       '<span class="string">"value2"</span>' +
       '\n  }\n]');
   });
