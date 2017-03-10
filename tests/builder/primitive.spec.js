@@ -2,7 +2,7 @@
 
 describe('Primitive builder', function () {
   var prime = function (values) {
-    var builder = new window.PrimitiveBuilder(new window.Buffer());
+    var builder = new window.PrimitiveBuilder(new window.StreamBuffer());
     values = Array.isArray(values) ? values : [values];
     values.forEach(function (it) {
       builder.add(it);

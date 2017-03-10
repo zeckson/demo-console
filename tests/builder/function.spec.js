@@ -1,12 +1,12 @@
 'use strict';
 
 describe('Function builder', function () {
-  var fun = function () {
-    return new window.FunctionBuilder(new window.Buffer());
+  var fun = function (buffer) {
+    return new window.FunctionBuilder(buffer || new window.StreamBuffer());
   };
 
   var object = function () {
-    return new window.ObjectBuilder(new window.Buffer());
+    return new window.ObjectBuilder(new window.StreamBuffer());
   };
 
 
@@ -33,7 +33,7 @@ describe('Function builder', function () {
 
       builder.begin().
         key('fun').
-        value(fun().begin().params(['it']).body(['return it;']).end().buffer).
+        value(fun(builder.buffer).begin().params(['it']).body(['return it;']).end().buffer).
       end();
 
       expect(builder.buffer.print()).to.equal('{\n  fun: function (it) {\n    return it;\n  }\n}');
