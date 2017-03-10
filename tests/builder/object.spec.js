@@ -1,8 +1,8 @@
 'use strict';
 
 describe('Object builder', function () {
-  var object = function () {
-    return new window.ObjectBuilder(new window.Buffer());
+  var object = function (buffer) {
+    return new window.ObjectBuilder(buffer || new window.StreamBuffer());
   };
 
   describe('simple tests', function () {
@@ -32,7 +32,7 @@ describe('Object builder', function () {
     it('1x depth', function () {
       var builder = object();
       builder.begin();
-      builder.add('"key"', object().begin().add('"key"', '"value"').end());
+      builder.key('"key"').value(object(builder.buffer).begin().add('"key"', '"value"').end());
       builder.end();
 
       expect(builder.buffer.print()).to.equal(JSON.stringify({key: {key: 'value'}}, void 0, 2));
@@ -41,8 +41,8 @@ describe('Object builder', function () {
     it('2x depth', function () {
       var builder = object();
       builder.begin();
-      builder.add('"key"', object().begin().
-        add('"key"', object().begin().
+      builder.key('"key"').value( object(builder.buffer).begin().
+        key('"key"').value(object(builder.buffer).begin().
           add('"key"', '"value"').
           end()).
         end()
@@ -55,8 +55,8 @@ describe('Object builder', function () {
     it('0x depth multiple keys', function () {
       var builder = object();
       builder.begin();
-      builder.add('"key"', object().begin().add('"key"', '"value"').end());
-      builder.add('"key2"', object().begin().add('"key"', '"value"').end());
+      builder.key('"key"').value(object(builder.buffer).begin().add('"key"', '"value"').end());
+      builder.key('"key2"').value(object(builder.buffer).begin().add('"key"', '"value"').end());
       builder.end();
 
       expect(builder.buffer.print()).to.equal(JSON.stringify({

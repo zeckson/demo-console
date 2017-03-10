@@ -50,6 +50,15 @@ describe('Array builder', function () {
       expect(arr.buffer.print()).to.equal(JSON.stringify([[[1]]], void 0, 2));
     });
 
+    it('three-dimensional empty', function () {
+      var arr = array();
+      arr.begin().
+        add(array(arr.buffer).begin().add(array(arr.buffer).begin().end()).end()).
+        end();
+
+      expect(arr.buffer.print()).to.equal(JSON.stringify([[[]]], void 0, 2));
+    });
+
     it('mixed', function () {
       var arr = array();
       arr.begin().
