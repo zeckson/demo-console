@@ -221,9 +221,7 @@ describe('Console', function () {
 
     jsConsole.log(codeToLog);
 
-    assert('log: [\n  ' +
-      '<span class="function">' + funCode + '</span>'  +
-      '\n]');
+    assert('log: [\n  <span class="function">' + funCode + '</span>\n]');
   });
 
   it('API: should log array of objects', function () {

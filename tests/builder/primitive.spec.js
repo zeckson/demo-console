@@ -35,13 +35,17 @@ describe('Primitive builder', function () {
       expect(prime(null).buffer.print()).to.equal('<span class="null">null</span>');
     });
 
-    it('anonymous symbol', function () {
-      expect(prime(Symbol()).buffer.print()).to.equal('<span class="symbol">undefined</span>');
-    });
+    //Disable tests if Symbol is unknown
+    if (typeof Symbol !== 'undefined') {
+      it('anonymous symbol', function () {
+        expect(prime(Symbol()).buffer.print()).to.equal('<span class="symbol">undefined</span>');
+      });
 
-    it('named symbol', function () {
-      expect(prime(Symbol.for('foo')).buffer.print()).to.equal('<span class="symbol">foo</span>');
-    });
+      it('named symbol', function () {
+        expect(prime(Symbol.for('foo')).buffer.print()).to.equal('<span class="symbol">foo</span>');
+      });
+    }
+
   });
 
   describe('unexpected value', function () {
