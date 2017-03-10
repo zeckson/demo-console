@@ -9,8 +9,8 @@ deploy:
   api_key:
     secure: MoCeQYRmsMEFLPOn7y63LP8XeeKmb+g1Rs3K04bYcApS7q5j8V6p/nNnAMKKFXjbf5BNG9aVrUCoO1maFO6QqDmygX5tG+sbMi03btq/i1pmkjCg+sEmmkkhO9Wuawg2wPjRwU/qV3pK9p+zzNgXDw9ccPdZjinDFoi08+vPcxU=
   file:
-  - out/index.js
   - out/index.min.js
+  - out/index-silent.js
   - out/index.css
   on:
     tags: true
