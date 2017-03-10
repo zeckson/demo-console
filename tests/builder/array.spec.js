@@ -1,8 +1,8 @@
 'use strict';
 
 describe('Array builder', function () {
-  var array = function () {
-    return new window.ArrayBuilder(new window.Buffer());
+  var array = function (buffer) {
+    return new window.ArrayBuilder(buffer || new window.StreamBuffer());
   };
 
   describe('simple tests', function () {
@@ -35,7 +35,7 @@ describe('Array builder', function () {
     it('two-dimensional', function () {
       var arr = array();
       arr.begin().
-        add(array().begin().add('1').end()).
+        add(array(arr.buffer).begin().add('1').end()).
         end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[1]], void 0, 2));
@@ -44,7 +44,7 @@ describe('Array builder', function () {
     it('three-dimensional', function () {
       var arr = array();
       arr.begin().
-        add(array().begin().add(array().begin().add('1').end()).end()).
+        add(array(arr.buffer).begin().add(array(arr.buffer).begin().add('1').end()).end()).
         end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[[1]]], void 0, 2));
@@ -53,7 +53,7 @@ describe('Array builder', function () {
     it('mixed', function () {
       var arr = array();
       arr.begin().
-        add(array().begin().add('1').end()).
+        add(array(arr.buffer).begin().add('1').end()).
         add('2').
         end();
 
