@@ -12,6 +12,7 @@ deploy:
     - out/index.min.js
     - out/index-silent.js
     - out/index.css
+  skip_cleanup: true
   on:
     tags: true
     all_branches: true
