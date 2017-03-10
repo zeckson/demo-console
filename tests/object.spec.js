@@ -1,8 +1,6 @@
 'use strict';
 
 describe('Object builder', function () {
-  chai.use(chaiDiff);
-
   var appendObject = function (buffer) {
     return fillBuffer(buffer, [['"key"', '"value"']]);
   };
@@ -17,10 +15,8 @@ describe('Object builder', function () {
     return buffer;
   };
 
-  var newObject = function () {
-    var buffer = new window.Buffer();
-    var builder = new window.ObjectBuilder(buffer);
-    return builder;
+  var object = function () {
+    return new window.ObjectBuilder(new window.Buffer());
   };
 
   describe('simple tests', function () {
@@ -46,41 +42,38 @@ describe('Object builder', function () {
     });
   });
 
-  describe('complex tests', function () {
-    it('object in object', function () {
-      var buffer = new window.Buffer();
-      fillBuffer(buffer, [['"key"', appendObject(new window.Buffer())]]);
+  describe('multi-dimensional', function () {
+    it('1x depth', function () {
+      var builder = object();
+      builder.begin();
+      builder.add('"key"', object().begin().add('"key"', '"value"').end());
+      builder.end();
 
-      expect(buffer.print()).to.equal(JSON.stringify({key: {key: 'value'}}, void 0, 2));
+      expect(builder.buffer.print()).to.equal(JSON.stringify({key: {key: 'value'}}, void 0, 2));
     });
 
-    it('object in object in object', function () {
-      var buffer = new window.Buffer();
-
-      var builder = newObject();
+    it('2x depth', function () {
+      var builder = object();
       builder.begin();
-      var inner = newObject();
-      inner.begin();
-      var inner2 = newObject();
-      inner2.begin();
-      inner2.add('"key"', '"value"');
-      inner2.end();
-      inner.add('"key"', inner2.buffer);
-      inner.end();
-      builder.add('"key"', inner.buffer);
+      builder.add('"key"', object().begin().
+        add('"key"', object().begin().
+          add('"key"', '"value"').
+          end()).
+        end()
+      );
       builder.end();
 
       expect(builder.buffer.print()).to.equal(JSON.stringify({key: {key: {key: 'value'}}}, void 0, 2));
     });
 
-    it('2 objects in object', function () {
-      var buffer = new window.Buffer();
-      fillBuffer(buffer, [
-        ['"key"', appendObject(new window.Buffer())],
-        ['"key2"', appendObject(new window.Buffer())]
-      ]);
+    it('0x depth multiple keys', function () {
+      var builder = object();
+      builder.begin();
+      builder.add('"key"', object().begin().add('"key"', '"value"').end());
+      builder.add('"key2"', object().begin().add('"key"', '"value"').end());
+      builder.end();
 
-      expect(buffer.print()).to.equal(JSON.stringify({
+      expect(builder.buffer.print()).to.equal(JSON.stringify({
         key: {key: 'value'},
         key2: {key: 'value'}
       }, void 0, 2));
