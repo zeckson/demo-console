@@ -10,10 +10,10 @@
     "test:dev": "karma start --browsers=Chrome --auto-watch",
     "clean": "rm -rf ./out && mkdir ./out",
     "concat": "uglifyjs lib/**/*.js lib/*.js -b -o out/index.js",
-    "minify": "uglifyjs lib/**/*.js lib/*.js -b -o out/index.min.js",
+    "minify": "uglifyjs lib/**/*.js lib/*.js --compress -o out/index.min.js",
     "copy": "cp lib/*.css out",
     "build": "npm run clean && npm run concat && npm run minify && npm run copy",
-    "examples": "npm run build && open examples/index.html"
+    "start": "npm run build && open examples/index.html"
   },
   "repository": {
     "type": "git",
