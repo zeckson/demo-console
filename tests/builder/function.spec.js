@@ -34,7 +34,7 @@ describe('Function builder', function () {
       builder.begin().
         key('fun').
         value(fun(builder.buffer).begin().params(['it']).body(['return it;']).end().buffer).
-      end();
+        end();
 
       expect(builder.buffer.print()).to.equal('{\n  fun: function (it) {\n    return it;\n  }\n}');
     });

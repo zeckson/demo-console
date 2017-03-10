@@ -56,8 +56,8 @@ describe('Array builder', function () {
       var arr = array();
       arr.begin().
         newItem().add(array(arr.buffer).begin().
-        newItem().add(array(arr.buffer).begin().
-        newItem().add('1').end()).end()).end();
+          newItem().add(array(arr.buffer).begin().
+            newItem().add('1').end()).end()).end();
 
       expect(arr.buffer.print()).to.equal(JSON.stringify([[[1]]], void 0, 2));
     });

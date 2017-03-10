@@ -41,7 +41,7 @@ describe('Object builder', function () {
     it('2x depth', function () {
       var builder = object();
       builder.begin();
-      builder.key('"key"').value( object(builder.buffer).begin().
+      builder.key('"key"').value(object(builder.buffer).begin().
         key('"key"').value(object(builder.buffer).begin().
           add('"key"', '"value"').
           end()).

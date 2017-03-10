@@ -27,7 +27,7 @@ describe('Buffer', function () {
 
 
     expect(print().print()).to.equal(
-      '{\n' +
+        '{\n' +
       '  {\n' +
       '    {\n' +
       '      {}\n' +
@@ -50,7 +50,7 @@ describe('Buffer', function () {
 
 
     expect(print().print()).to.equal(
-      '{\n' +
+        '{\n' +
       '  {\n' +
       '    {\n' +
       '      {}\n' +

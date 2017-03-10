@@ -4,8 +4,8 @@
   "description": "Inbrowser Demo Console",
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint ./**/*.js",
-    "lint:fix": "eslint ./**/*.js --fix",
+    "lint": "eslint ./**/*.js ./lib/**/*.js",
+    "lint:fix": "eslint ./**/*.js ./lib/**/*.js --fix",
     "test": "karma start --browsers=PhantomJS2 --single-run && npm run lint",
     "test:dev": "karma start --browsers=Chrome --auto-watch",
     "clean": "rm -rf ./out && mkdir ./out",
