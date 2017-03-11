@@ -58,12 +58,12 @@ describe('Primitive builder', function () {
 
   describe('several values', function () {
     it('numbers', function () {
-      expect(prime([42, 43]).buffer.print()).to.equal('<span class="number">42</span>\t<span class="number">43</span>');
+      expect(prime([42, 43]).buffer.print()).to.equal('<span class="number">42</span>  <span class="number">43</span>');
     });
 
     it('number and string', function () {
       expect(prime([42, 'string']).buffer.print()).to.
-        equal('<span class="number">42</span>\t<span class="string">"string"</span>');
+        equal('<span class="number">42</span>  <span class="string">"string"</span>');
     });
   });
 
