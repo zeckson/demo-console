@@ -17,6 +17,7 @@
     "build": "npm run concat && npm run minify",
     "build:silent": "npm run concat:silent && npm run minify:silent ",
     "release": "npm run clean && npm run copy && npm run build && npm run build:silent",
+    "deploy": "npm run release && gh-pages -d ./out",
     "start": "npm run release && open examples/index.html"
   },
   "repository": {
@@ -33,6 +34,7 @@
     "chai": "^3.5.0",
     "eslint": "3.17.1",
     "eslint-config-htmlacademy": "0.2.3",
+    "gh-pages": "0.12.0",
     "karma": "^0.13.21",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.2",
