@@ -1,6 +1,0 @@
-node_modules
-*.log
-tests/coverage
-tests/report-lcovonly.txt
-
-.idea
