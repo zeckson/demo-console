@@ -62,10 +62,6 @@
             }
             return this;
         },
-        pop: function() {
-            this.buffer.pop();
-            return this;
-        },
         pushValue: function(value) {
             this.buffer.push(value);
             return this;
@@ -76,9 +72,6 @@
         },
         print: function() {
             return this.buffer.join("");
-        },
-        toString: function() {
-            return this.print();
         }
     };
     window.StreamBuffer = StreamBuffer;
@@ -239,7 +232,9 @@
     PrimitiveBuilder.prototype = {
         add: function(value) {
             if (this.filled) {
-                this.buffer.push("\t");
+                this.buffer.shift();
+                this.buffer.indent();
+                this.buffer.unshift();
             }
             this.filled = true;
             var html;
@@ -399,4 +394,52 @@
         return html + "\n\n\n";
     };
     global.jsConsoleInit = jsConsoleInit;
+})(window);
+
+"use strict";
+
+(function(global) {
+    var CSS_URL = "//htmlacademy.github.io/demo-console/lib/index.css";
+    var errors = [];
+    var collectErr = function(err) {
+        errors.push(err);
+    };
+    global.onerror = collectErr;
+    global.console.warn = collectErr;
+    global.console.error = collectErr;
+    var messages = [];
+    var collectMsg = function(msg) {
+        messages.push(msg);
+    };
+    global.console.info = collectMsg;
+    global.console.log = collectMsg;
+    global.console.debug = collectMsg;
+    var init = function() {
+        var div = global.document.createElement("div");
+        var jsConsole = global.jsConsoleInit(div);
+        global.document.body.appendChild(div);
+        global.console.log = jsConsole.log;
+        global.console.error = jsConsole.error;
+        global.console.info = jsConsole.log;
+        global.console.warn = jsConsole.error;
+        errors.forEach(function(error) {
+            jsConsole.error(error);
+        });
+        messages.forEach(function(msg) {
+            jsConsole.log(msg);
+        });
+        global.onerror = function(error) {
+            jsConsole.error(error);
+        };
+    };
+    var loadStyles = function() {
+        var link = global.document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = CSS_URL;
+        global.document.head.appendChild(link);
+    };
+    window.addEventListener("DOMContentLoaded", function() {
+        init();
+        loadStyles();
+    });
 })(window);
