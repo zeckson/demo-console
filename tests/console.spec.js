@@ -185,11 +185,11 @@ describe('Console', function () {
   it('API: should print recursive object', function () {
     var a = {};
     a.b = {a: a};
-    jsConsole.log(a);
 
     expect(function () {
-      jsConsole.getLogSource()
-    }).not.to.throw;
+      jsConsole.log(a);
+      jsConsole.getLogSource();
+    }).not.to.throw();
   });
 
   it('API: should log function', function () {
