@@ -396,55 +396,25 @@
         logger.getLogSource = function() {
             return consoleContainer.innerHTML;
         };
+        logger.logDeep = function(obj, level) {
+            level = level || MAX_DEPTH_LEVEL;
+            var oldLevel = MAX_DEPTH_LEVEL;
+            try {
+                MAX_DEPTH_LEVEL = level;
+                logger.log(obj);
+            } finally {
+                MAX_DEPTH_LEVEL = oldLevel;
+            }
+        };
+        logger.extend = function(consoleObject) {
+            consoleObject.log = logger.log;
+            consoleObject.info = logger.log;
+            consoleObject.error = logger.error;
+            consoleObject.warn = logger.error;
+            consoleObject.dir = logger.logDeep;
+            return consoleObject;
+        };
         return logger;
     };
     global.jsConsoleInit = jsConsoleInit;
-})(window);
-
-"use strict";
-
-(function(global) {
-    var CSS_URL = "//zeckson.github.io/demo-console/index.css";
-    var errors = [];
-    var collectErr = function(err) {
-        errors.push(err);
-    };
-    global.onerror = collectErr;
-    global.console.warn = collectErr;
-    global.console.error = collectErr;
-    var messages = [];
-    var collectMsg = function(msg) {
-        messages.push(msg);
-    };
-    global.console.info = collectMsg;
-    global.console.log = collectMsg;
-    global.console.debug = collectMsg;
-    var init = function() {
-        var div = global.document.createElement("div");
-        var jsConsole = global.jsConsoleInit(div);
-        global.document.body.appendChild(div);
-        global.console.log = jsConsole.log;
-        global.console.error = jsConsole.error;
-        global.console.info = jsConsole.log;
-        global.console.warn = jsConsole.error;
-        errors.forEach(function(error) {
-            jsConsole.error(error);
-        });
-        messages.forEach(function(msg) {
-            jsConsole.log(msg);
-        });
-        global.onerror = function(error) {
-            jsConsole.error(error);
-        };
-    };
-    var loadStyles = function() {
-        var link = global.document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = CSS_URL;
-        global.document.head.appendChild(link);
-    };
-    window.addEventListener("DOMContentLoaded", function() {
-        init();
-        loadStyles();
-    });
 })(window);
