@@ -13,6 +13,7 @@ module.exports = function (config) {
       'node_modules/chai-diff/node_modules/diff/dist/diff.js',
       'node_modules/chai-diff/chai-diff.js',
       'lib/**/*.js',
+      'lib/index.js',
       'tests/*.spec.js',
       'tests/**/*.spec.js'
     ],
