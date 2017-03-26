@@ -8,7 +8,7 @@
 <body>
 <div class="console-container"></div>
 
-<script src="../out/index.min.js"></script>
+<script src="../out/index.js"></script>
 
 <script>
   window.jsConsole = jsConsoleInit(document.querySelector('.console-container'));
@@ -42,7 +42,7 @@
   a.b = {a: a};
   jsConsole.log(a);
 
-  jsConsole.log(document.querySelector('div').classList);
+  jsConsole.log(document.querySelector('div'));
 
   jsConsole.log(function () {
     var testVariable = 'method code';
