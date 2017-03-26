@@ -17,6 +17,7 @@ module.exports = {
   },
 
   'rules': {
-    'no-fallthrough': 'off'
+    'no-fallthrough': 'off',
+    'guard-for-in': 'off'
   }
 };
