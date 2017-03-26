@@ -184,14 +184,12 @@ describe('Console', function () {
 
   it('API: should print recursive object', function () {
     var a = {};
-    var b = {a: a};
-    a.b = b;
+    a.b = {a: a};
     jsConsole.log(a);
 
-    assert('log: {\n  ' +
-      '<span class="key">key</span>: ' +
-      '<span class="string">"value"</span>' +
-      '\n}');
+    expect(function () {
+      jsConsole.getLogSource()
+    }).not.to.throw;
   });
 
   it('API: should log function', function () {
