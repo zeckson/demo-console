@@ -15,6 +15,20 @@ describe('Buffer', function () {
       push('}').print()).to.equal('{  {}  }');
   });
 
+  it('get current indent level', function () {
+    var buffer = new window.StreamBuffer();
+
+    expect(buffer.getIndentLevel()).to.equal(0);
+    var inner = buffer.push('{').
+      shift().indent().push('{}');
+
+    expect(buffer.getIndentLevel()).to.equal(1);
+    var outer = inner.indent().unshift().
+      push('}');
+
+    expect(buffer.getIndentLevel()).to.equal(0);
+  });
+
   it('stream print', function () {
 
     var print = function (buffer, level) {
