@@ -38,6 +38,10 @@
     {key2: 'value2'}
   ]);
 
+  var a = {};
+  a.b = {a: a};
+  jsConsole.log(a);
+
   jsConsole.log(document.querySelector('div').classList);
 
   jsConsole.log(function () {
