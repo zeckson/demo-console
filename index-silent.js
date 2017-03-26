@@ -399,7 +399,7 @@
 "use strict";
 
 (function(global) {
-    var CSS_URL = "//zeckson.github.io/demo-console/index.css";
+    var CSS_URL = "//htmlacademy.github.io/demo-console/lib/index.css";
     var errors = [];
     var collectErr = function(err) {
         errors.push(err);
