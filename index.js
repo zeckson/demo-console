@@ -54,6 +54,9 @@
             this._indent.pop();
             return this;
         },
+        getIndentLevel: function() {
+            return this._indent.length;
+        },
         push: function(entry) {
             if (this === entry) {
                 return entry;
@@ -285,37 +288,9 @@
 "use strict";
 
 (function(global) {
-    function jsConsoleInit(consoleContainer) {
-        consoleContainer.classList.add("console-container");
-        consoleContainer.innerHTML = '<pre class="console-container__code"></pre>';
-        var codeContainer = consoleContainer.querySelector(".console-container__code");
-        if (!codeContainer) {
-            throw Error("Console is not inited!");
-        }
-        var log = function() {
-            var args = Array.prototype.slice.call(arguments);
-            codeContainer.innerHTML += printEntries(args);
-            if (typeof logger.onlog === "function") {
-                logger.onlog(args);
-            }
-        };
-        var err = function(errorMessage) {
-            codeContainer.innerHTML += printEntries([ errorMessage ], true);
-        };
-        var clean = function() {
-            codeContainer.innerHTML = "";
-        };
-        var getLogSource = function() {
-            return consoleContainer.innerHTML;
-        };
-        var logger = {
-            log: log,
-            error: err,
-            clean: clean,
-            getLogSource: getLogSource
-        };
-        return logger;
-    }
+    var MAX_DEPTH_LEVEL = 5;
+    var STRIP_SYMBOL = "...";
+    var MAX_BUFFER_SIZE = 1024 * 10;
     var printError = function(error) {
         if (error instanceof Error) {
             error = error.message;
@@ -335,11 +310,9 @@
         builder.end();
     };
     var printPlainObject = function(value, buffer) {
-        var keys = Object.keys(value);
         var builder = new window.HtmlObjectBuilder(buffer);
         builder.begin();
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
+        for (var key in value) {
             builder.key(key).value(print(value[key], buffer));
         }
         builder.end();
@@ -357,6 +330,12 @@
     }
     var print = function(value, buffer) {
         buffer = buffer || new window.StreamBuffer();
+        if (buffer.getIndentLevel() >= MAX_DEPTH_LEVEL) {
+            value = STRIP_SYMBOL;
+        }
+        if (buffer.buffer.length > MAX_BUFFER_SIZE) {
+            return buffer;
+        }
         var type = typeof value;
         switch (type) {
           case "function":
@@ -392,6 +371,50 @@
             });
         }
         return html + "\n\n\n";
+    };
+    var jsConsoleInit = function(consoleContainer) {
+        consoleContainer.classList.add("console-container");
+        consoleContainer.innerHTML = '<pre class="console-container__code"></pre>';
+        var codeContainer = consoleContainer.querySelector(".console-container__code");
+        if (!codeContainer) {
+            throw Error("Console is not inited!");
+        }
+        var logger = {};
+        logger.log = function() {
+            var args = Array.prototype.slice.call(arguments);
+            codeContainer.innerHTML += printEntries(args);
+            if (typeof logger.onlog === "function") {
+                logger.onlog(args);
+            }
+        };
+        logger.error = function(errorMessage) {
+            codeContainer.innerHTML += printEntries([ errorMessage ], true);
+        };
+        logger.clean = function() {
+            codeContainer.innerHTML = "";
+        };
+        logger.getLogSource = function() {
+            return consoleContainer.innerHTML;
+        };
+        logger.logDeep = function(obj, level) {
+            level = level || MAX_DEPTH_LEVEL;
+            var oldLevel = MAX_DEPTH_LEVEL;
+            try {
+                MAX_DEPTH_LEVEL = level;
+                logger.log(obj);
+            } finally {
+                MAX_DEPTH_LEVEL = oldLevel;
+            }
+        };
+        logger.extend = function(consoleObject) {
+            consoleObject.log = logger.log;
+            consoleObject.info = logger.log;
+            consoleObject.error = logger.error;
+            consoleObject.warn = logger.error;
+            consoleObject.dir = logger.logDeep;
+            return consoleObject;
+        };
+        return logger;
     };
     global.jsConsoleInit = jsConsoleInit;
 })(window);
