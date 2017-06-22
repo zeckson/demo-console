@@ -267,7 +267,7 @@
                 break;
 
               case "symbol":
-                html = '<span class="' + type + '">' + Symbol.keyFor(value) + "</span>";
+                html = '<span class="' + type + '">' + value.toString() + "</span>";
                 break;
 
               case "object":
@@ -422,7 +422,7 @@
 "use strict";
 
 (function(global) {
-    var CSS_URL = "//zeckson.github.io/demo-console/index.css";
+    var CSS_URL = "//htmlacademy.github.io/demo-console/lib/index.css";
     var errors = [];
     var collectErr = function(err) {
         errors.push(err);
