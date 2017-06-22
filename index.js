@@ -267,7 +267,7 @@
                 break;
 
               case "symbol":
-                html = '<span class="' + type + '">' + Symbol.keyFor(value) + "</span>";
+                html = '<span class="' + type + '">' + value.toString() + "</span>";
                 break;
 
               case "object":
